@@ -41,8 +41,11 @@ class Product(BaseModel):
 # Add your own schemas here:
 # --------------------------------------------------
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Document(BaseModel):
+    """
+    Document uploads metadata
+    Collection name: "document" (lowercase of class name)
+    """
+    filename: str = Field(..., description="Original file name")
+    content_type: str = Field(..., description="MIME type, e.g., application/pdf")
+    size: int = Field(..., ge=0, description="File size in bytes")
